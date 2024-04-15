@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'futur';
-  src: local('Futura'), url('fonts/futura/futuraheavy.woff') format('truetype');
+  src: local('Futura'), url('../fonts/futura/futuraheavy.woff') format('woff');
 }
 
 @font-face {
   font-family: 'disp';
-  src: url('fonts/display/display.woff') format('truetype');
+  src: url('../fonts/display/display.woff') format('woff');
 }
 
 body {
@@ -71,7 +71,7 @@ button{
   margin: 20px;
 }
 .countdown {
-  font-size: 64px;
+  font-size: 60px;
   position: absolute;
   font-family: 'disp', sans-serif;
   user-select: none;
