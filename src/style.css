@@ -25,12 +25,50 @@ body {
   bottom: 1em;
   text-align: center;
   width:100%;
-}a {
+}
+.link {
   background-image: linear-gradient(
     to right,
-    #FC5154,
-    #ff0f7b 50%,
-    #f89b29 50%
+    #5A2A3E,
+    #033347 50%,
+    #B42135 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.link:before {
+  content: '';
+  background-image: linear-gradient(
+    to right,
+    #5A2A3E,
+    #033347 50%
+  );
+  display: block;
+  position: absolute;
+  bottom: 0.05em;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
+}
+.link:hover {
+  background-position: 0;
+}
+.link:hover::before {
+  width: 100%;
+}
+
+.github {
+  background-image: linear-gradient(
+    to right,
+    #903B65,
+    #6E5494 50%,
+    #B42135 50%
   );
   background-size: 200% 100%;
   background-position: -100%;
@@ -41,23 +79,23 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-a:before{
+.github:before{
   content: '';
-  background: #ff0f7b;
   display: block;
   position: absolute;
-  bottom: -3px;
+  bottom: 0px;
   left: 0;
   width: 0;
   height: 3px;
   transition: all 0.3s ease-in-out;
 }
 
-a:hover {
+.github:hover {
  background-position: 0;
+ transform: scale(1.2);
 }
 
-a:hover::before{
+.github:hover::before{
   width: 100%;
 }
 
@@ -65,7 +103,7 @@ h1 {
   font-size: 64px;
 }
 h2 {
-  font-size: 36px; 
+  font-size: 46px; 
 }
 button{
   margin: 20px;
