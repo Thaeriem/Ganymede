@@ -29,9 +29,9 @@ const detail = 12;
 const loader = new THREE.TextureLoader();
 const geometry = new THREE.IcosahedronGeometry(1, detail);
 const material = new THREE.MeshPhongMaterial({
-  map: loader.load("/img/ganymede.jpeg"),
-  specularMap: loader.load("/img/SpecularMap.png"),
-  bumpMap: loader.load("/img/NormalMap.png"),
+  map: loader.load("images/ganymede.jpeg"),
+  specularMap: loader.load("images/SpecularMap.png"),
+  bumpMap: loader.load("images/NormalMap.png"),
   bumpScale: 0.04,
 });
 const moonMesh = new THREE.Mesh(geometry, material);

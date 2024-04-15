@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'futur';
-  src: local('Futura'), url('../fonts/futura/futuraheavy.woff') format('woff');
+  src: local('Futura'), url('../docs/assets/fonts/futura/futuraheavy.woff') format('woff');
 }
 
 @font-face {
   font-family: 'disp';
-  src: url('../fonts/display/display.woff') format('woff');
+  src: url('../docs/assets/fonts/display/display.woff') format('woff');
 }
 
 body {
