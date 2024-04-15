@@ -10,7 +10,7 @@ const scene = new THREE.Scene()
 scene.background = new THREE.Color( 0x01010A );
 
 const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-camera.position.z = 2;
+camera.position.z = 2.3;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
 renderer.toneMapping = THREE.ACESFilmicToneMapping

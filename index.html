@@ -8,16 +8,20 @@
 
   <body>
     <script type="module" src="/src/main.ts"></script>
-    <div style="width:100%;height:10px;text-align: center;color:white;" class="ui"><h1>Ganymede</h1></div>
-
-    <div style="color:white; top: 1.45em; right: 0.5em; position: absolute;" class="countdown" id="countdownDisplay">
-      <script type="module">
-          // Import the startCountdown function from the TypeScript file
-          import { startCountdown } from '/src/countdown.ts';
-          // Start the countdown when the page loads
-          startCountdown('2024-12-31T23:59:59', 'countdownDisplay');
-      </script>
+    <div style="width:100%;text-align: center;" class="ui"><h1>Ganymede</h1></div>
+    <div style="right:11.7em;top:2.5em" class="ui">
+      <h2>
+        <a href="https://www.esa.int/Science_Exploration/Space_Science/Juice">JUICE</a> lands:
+      </h2>
+    </div>
+    <div style="top: 2em; right: 0.5em;" class="countdown" id="countdownDisplay">
+    <script type="module">
+        // Import the startCountdown function from the TypeScript file
+        import { startCountdown } from '/src/countdown.ts';
+        // Start the countdown when the page loads
+        startCountdown('2030-05-08T23:59:59', 'countdownDisplay');
+    </script>
   </div>
-  
+  <div class="ui2"><h2>/ 'gæn əˌmid /</h2></div>
   </body>
 </html>

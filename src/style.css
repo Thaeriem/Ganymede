@@ -11,21 +11,68 @@
 body {
   overflow: hidden;
   margin: 0;
-  font-family: 'disp', sans-serif;
+  font-family: 'futur', sans-serif;
+  color:white; 
+  position: absolute;
 }
 
 .ui {
   position: absolute;
 }
 
+.ui2 {
+  position: absolute;
+  bottom: 1em;
+  text-align: center;
+  width:100%;
+}a {
+  background-image: linear-gradient(
+    to right,
+    #FC5154,
+    #ff0f7b 50%,
+    #f89b29 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+a:before{
+  content: '';
+  background: #ff0f7b;
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+ background-position: 0;
+}
+
+a:hover::before{
+  width: 100%;
+}
+
 h1 {
-  font-size: 36px; /* Set font size to 36 pixels */
+  font-size: 64px;
+}
+h2 {
+  font-size: 36px; 
 }
 button{
   margin: 20px;
 }
 .countdown {
-  font-size: 24px;
+  font-size: 64px;
   position: absolute;
   font-family: 'disp', sans-serif;
+  user-select: none;
 }

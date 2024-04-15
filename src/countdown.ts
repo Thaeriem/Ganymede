@@ -10,7 +10,12 @@ export function startCountdown(targetDate: string, displayElementId: string): vo
         const minutes: number = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
         const seconds: number = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-        const countdownDisplay: string = `${days}D${hours}HR${minutes}MIN${seconds}SEC`;
+        // Pad single-digit hours, minutes, and seconds with leading zeros
+        const paddedHours: string = hours.toString().padStart(2, '0');
+        const paddedMinutes: string = minutes.toString().padStart(2, '0');
+        const paddedSeconds: string = seconds.toString().padStart(2, '0');
+
+        const countdownDisplay: string = `${days}:${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
 
         const displayElement: HTMLElement | null = document.getElementById(displayElementId);
         if (displayElement) {
