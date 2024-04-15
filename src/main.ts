@@ -1,100 +1,74 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import Stats from 'three/addons/libs/stats.module.js'
+import getStarfield from './getStarfield'
+import { getFresnelMat } from './getFresnelMap.js'
 
+const w = window.innerWidth;
+const h = window.innerHeight;
 const scene = new THREE.Scene()
 scene.background = new THREE.Color( 0x01010A );
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 13);
-ambientLight.position.set(0, 0, 400);
-scene.add(ambientLight);
-
-const pointLight = new THREE.PointLight(0xffffff, 30);
-pointLight.position.set(0, 0, 400);
-scene.add(pointLight);
-
-const particlesGeometry = new THREE.BufferGeometry(); // Geometry for the stars
-const particlesCount = 10000; // number of particles to be created
-
-const vertices = new Float32Array(particlesCount); // Float32Array is an array of 32-bit floats. This is used to represent an array of vertices. (we have 3 values for each vertex - coordinates x, y, z)
-
-// Loop through all the vertices and set their random position
-for (let i = 0; i < particlesCount; i += 3) {
-  // Generate random spherical coordinates (r, θ, φ)
-  const randomR = Math.random(); // Random value between 0 and 1
-  const r = Math.sqrt(randomR) * 1000; // Use square root function to bias distribution towards edges
-
-  const theta = Math.random() * Math.PI * 2; // Azimuthal angle
-  const phi = Math.acos(Math.random() * 2 - 1); // Polar angle
-
-  // Convert spherical coordinates to Cartesian coordinates
-  vertices[i] = r * Math.sin(phi) * Math.cos(theta); // x
-  vertices[i + 1] = r * Math.sin(phi) * Math.sin(theta); // y
-  vertices[i + 2] = r * Math.cos(phi)+400; // z (offset by 400 to center around (0, 0, 400))
-}
-
-
-
-particlesGeometry.setAttribute(
-  'position',
-  new THREE.BufferAttribute(vertices, 3) // 3 values for each vertex (x, y, z)
-  // Check the documentation for more info about this.
-);
-
-const textureLoader = new THREE.TextureLoader();
-const particleTexture = textureLoader.load('/img/star2.png');
-
-// Material
-const particlesMaterial = new THREE.PointsMaterial({
-  size: 1.5, // Size of the particles
-  map: particleTexture,
-  transparent: true,
-  sizeAttenuation: true, // size of the particle will be smaller as it gets further away from the camera, and if it's closer to the camera, it will be bigger
-});
-
-const stars = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(stars);
-
-
-const camera = new THREE.PerspectiveCamera(500, window.innerWidth / window.innerHeight, 0.1, 1000)
-camera.position.set(0, 0, 60)
+const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+camera.position.z = 2;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
 renderer.toneMapping = THREE.ACESFilmicToneMapping
-renderer.toneMappingExposure = 0.1
-renderer.shadowMap.enabled = true
-renderer.setSize(window.innerWidth, window.innerHeight)
-document.body.appendChild(renderer.domElement)
-
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-})
+renderer.toneMappingExposure = 0.75
+renderer.setSize(w, h);
+document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
 
-new GLTFLoader().load('/models/ganymede.glb', (gltf) => {
-  const model = gltf.scene;
-  model.scale.set(0.1,0.1,0.1);
-  scene.add(model);
+const moonGroup = new THREE.Group();
+moonGroup.rotation.z = -23.4 * Math.PI / 180;
+scene.add(moonGroup);
+new OrbitControls(camera, renderer.domElement);
+const detail = 12;
+const loader = new THREE.TextureLoader();
+const geometry = new THREE.IcosahedronGeometry(1, detail);
+const material = new THREE.MeshPhongMaterial({
+  map: loader.load("/img/ganymede.jpeg"),
+  specularMap: loader.load("/img/SpecularMap.png"),
+  bumpMap: loader.load("/img/NormalMap.png"),
+  bumpScale: 0.04,
 });
+const moonMesh = new THREE.Mesh(geometry, material);
+moonGroup.add(moonMesh);
 
+const sunLight = new THREE.DirectionalLight(0xffffff);
+sunLight.position.set(-2, 0.5, 1.5);
+scene.add(sunLight);
 
-const stats = new Stats()
-document.body.appendChild(stats.dom)
+const backLight = new THREE.AmbientLight(0xffffff, Math.PI * 0.075);
+scene.add(backLight)
+
+const funLight = new THREE.AmbientLight(0xC3B1E1, Math.PI * 0.4)
+scene.add(funLight)
+
+const stars = getStarfield({numStars: 2000});
+scene.add(stars);
+
+const fresnelMat = getFresnelMat();
+const glowMesh = new THREE.Mesh(geometry, fresnelMat);
+glowMesh.scale.setScalar(1.01);
+moonGroup.add(glowMesh);
 
 function animate() {
-  requestAnimationFrame(animate)
+  requestAnimationFrame(animate);
 
+  moonMesh.rotation.y += 0.002;
+  glowMesh.rotation.y += 0.002;
+  stars.rotation.y -= 0.0002;
   controls.update()
-
-  renderer.render(scene, camera)
-
-  stats.update()
+  renderer.render(scene, camera);
 }
-
 animate()
+
+function handleWindowResize () {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', handleWindowResize, false);
