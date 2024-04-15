@@ -1,7 +1,15 @@
-# Based off of and learned from Three.js Tutorial Below:
+# Rendering Ganymede
+Ganymede, the largest moon of Jupiter, is a captivating celestial object and is known for its unique features like its sub-surface salt water ocean and scientific significance. This project aims to create an immersive visual experience of Ganymede and Jupiter using Three.js and TypeScript. In this process, we used the spin and axial tilt of both Ganymede and Jupiter in the visualization and represented the relative distance between them scaled down to roughly 30%. Both celestial bodies have their normal and specular maps overlayed to attempt to reflect the real-life visage of these celestial bodies.
 
-This boilerplate is supplementary to <!--my book titled [**Three.js and TypeScript**](https://amzn.to/3FahROZ) and--> my **ThreeJS and TypeScript** courses at [Udemy](https://www.udemy.com/course/threejs-tutorials/?referralCode=4C7E1DE91C3E42F69D0F) and [YouTube (Channel membership required)](https://www.youtube.com/playlist?list=PLKWUX7aMnlEKTmkBqwjc-tZgULJdNBjEd)
+---
 
-[Introductory Video](https://youtu.be/cZWAqrJhtvQ&list=PLKWUX7aMnlEKTmkBqwjc-tZgULJdNBjEd)
+## References:
+https://www.youtube.com/@robotbobby9 \
+https://www.youtube.com/@sbcode
 
-[Course Discount Coupons](https://sbcode.net/coupons#threejs)
+---
+
+## Author:
+Yash Kaul
+
+---
