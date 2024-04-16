@@ -1,5 +1,6 @@
 export function startCountdown(targetDate: string, displayElementId: string): void {
     const targetTime: number = new Date(targetDate).getTime();
+    let countdownInterval: number;
 
     const updateCountdown = (): void => {
         const currentTime: number = new Date().getTime();
@@ -23,13 +24,14 @@ export function startCountdown(targetDate: string, displayElementId: string): vo
         }
 
         if (timeRemaining <= 0) {
+            console.log("here")
             clearInterval(countdownInterval);
             if (displayElement) {
-                displayElement.innerText = 'Launched!';
+                displayElement.innerText = 'ARRIVED.';
             }
         }
     };
 
     updateCountdown();
-    const countdownInterval: number = setInterval(updateCountdown, 1000);
+    countdownInterval = setInterval(updateCountdown, 1000);
 }
